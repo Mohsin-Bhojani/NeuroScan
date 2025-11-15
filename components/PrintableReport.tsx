@@ -1,0 +1,94 @@
+
+import React from 'react';
+import type { ReportData } from '../types';
+
+interface PrintableReportProps {
+  data: ReportData;
+}
+
+export const PrintableReport: React.FC<PrintableReportProps> = ({ data }) => {
+  const { image, predictions, analysis } = data;
+  const { explanation, summary, riskAssessment, recommendation } = analysis;
+  
+  const formatDate = () => new Date().toLocaleDateString('en-US', {
+    year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'
+  });
+
+  return (
+    <div style={{ width: '210mm', minHeight: '297mm', fontFamily: 'sans-serif', color: '#1f2937', padding: '15mm', backgroundColor: 'white' }}>
+      <header style={{ borderBottom: '2px solid #3b82f6', paddingBottom: '10px', marginBottom: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <h1 style={{ fontSize: '28px', color: '#1e3a8a', margin: 0, fontWeight: 'bold' }}>NeuroScan AI Analysis Report</h1>
+        <div style={{ textAlign: 'right', fontSize: '12px', color: '#475569' }}>
+          <p style={{ margin: 0 }}>Report Generated: {formatDate()}</p>
+        </div>
+      </header>
+
+      <main>
+        <section style={{ marginBottom: '20px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+          <div>
+            <h2 style={{ fontSize: '18px', color: '#1d4ed8', borderBottom: '1px solid #dbeafe', paddingBottom: '5px', marginBottom: '10px' }}>Uploaded Image</h2>
+            <img src={image} alt="Medical scan" style={{ maxWidth: '100%', borderRadius: '8px', border: '1px solid #e5e7eb' }} />
+          </div>
+          <div>
+            <h2 style={{ fontSize: '18px', color: '#1d4ed8', borderBottom: '1px solid #dbeafe', paddingBottom: '5px', marginBottom: '10px' }}>Model Predictions</h2>
+            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+              <thead>
+                <tr>
+                  <th style={{ background: '#eff6ff', padding: '8px', textAlign: 'left', border: '1px solid #dbeafe' }}>Finding</th>
+                  <th style={{ background: '#eff6ff', padding: '8px', textAlign: 'right', border: '1px solid #dbeafe' }}>Confidence</th>
+                </tr>
+              </thead>
+              <tbody>
+                {predictions.map((p, i) => (
+                  <tr key={i}>
+                    <td style={{ padding: '8px', border: '1px solid #dbeafe' }}>{p.class}</td>
+                    <td style={{ padding: '8px', textAlign: 'right', border: '1px solid #dbeafe', fontWeight: 'bold' }}>{(p.confidence * 100).toFixed(1)}%</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section style={{ marginBottom: '20px' }}>
+          <h2 style={{ fontSize: '18px', color: '#1d4ed8', borderBottom: '1px solid #dbeafe', paddingBottom: '5px', marginBottom: '10px' }}>Explanation & Summary</h2>
+          <p style={{ fontSize: '14px', lineHeight: 1.6, marginBottom: '15px' }}>{explanation}</p>
+          <div style={{ backgroundColor: '#f0f9ff', padding: '15px', borderRadius: '8px', border: '1px solid #dbeafe' }}>
+            <h3 style={{ fontSize: '16px', margin: '0 0 10px 0', color: '#1e40af' }}>{summary.title}</h3>
+            <ul style={{ margin: 0, paddingLeft: '20px' }}>
+              {summary.points.map((point, index) => (
+                <li key={index} style={{ fontSize: '14px', marginBottom: '5px' }}>{point}</li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        <section style={{ marginBottom: '20px' }}>
+          <h2 style={{ fontSize: '18px', color: '#1d4ed8', borderBottom: '1px solid #dbeafe', paddingBottom: '5px', marginBottom: '10px' }}>Risk & Recommendations</h2>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', marginBottom: '10px' }}>Risk Assessment</h3>
+              <p style={{ fontSize: '14px' }}><strong>Severity:</strong> {riskAssessment.severity}</p>
+              <p style={{ fontSize: '14px', lineHeight: 1.6 }}>{riskAssessment.justification}</p>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', marginBottom: '10px' }}>Next Steps (Priority: {recommendation.priority})</h3>
+              <ul style={{ margin: 0, paddingLeft: '20px' }}>
+                {recommendation.nextSteps.map((step, index) => (
+                  <li key={index} style={{ fontSize: '14px', marginBottom: '5px' }}>{step}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section style={{ marginTop: '20px', paddingTop: '15px', borderTop: '1px solid #dbeafe' }}>
+           <h3 style={{ fontSize: '16px', marginBottom: '10px' }}>Disclaimer</h3>
+           <p style={{ fontSize: '12px', color: '#475569' }}>
+             {recommendation.disclaimer} This report was generated by an AI assistant and is intended for informational purposes only. It is not a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of a qualified health provider with any questions you may have regarding a medical condition.
+           </p>
+        </section>
+      </main>
+    </div>
+  );
+};

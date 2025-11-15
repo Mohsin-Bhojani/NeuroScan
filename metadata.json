@@ -1,0 +1,5 @@
+{
+  "name": "MediScan AI Analyst",
+  "description": "An AI-powered medical imaging analysis tool that provides predictions, explanations, summaries, and actionable recommendations. It can generate a comprehensive, downloadable report for professional review.",
+  "requestFramePermissions": []
+}

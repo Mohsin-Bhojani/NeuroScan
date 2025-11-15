@@ -1,0 +1,68 @@
+🧠 TumorVision – Brain Tumor Detection AI
+An AI-powered system that analyzes MRI scans to detect brain tumors using a custom computer-vision model. Built with a modern, animated UI and optimized for fast performance.
+🚀 Features
+Real-time tumor detection using a custom-trained Roboflow model
+MRI image upload & preview
+Bounding boxes + confidence scores
+Tumor classification (e.g., Glioma, Meningioma, Pituitary)
+Personalized treatment recommendation screen
+Smooth UI animations with Framer Motion
+Fully front-end based — no backend server required
+🖥️ Tech Stack
+React + TypeScript
+TailwindCSS
+Framer Motion
+Vite
+Roboflow Hosted Inference API (YOLOv8)
+📂 Project Structure
+src/
+ ├── components/
+ │    ├── GooeyNav.tsx
+ │    ├── Squares.tsx
+ │    └── ...
+ ├── Analysis.tsx
+ ├── TreatmentPlan.tsx
+ ├── AboutUs.tsx
+ ├── App.tsx
+ └── main.tsx
+🧪 How It Works
+User uploads an MRI scan
+The image is sent to the Roboflow inference endpoint
+The AI model detects tumors + generates bounding boxes
+The UI displays the detections
+User selects the tumor type to view treatment guidance
+⚙️ Setup Instructions
+1️⃣ Clone the repository
+git clone https://github.com/your-username/tumorvision.git
+cd tumorvision
+2️⃣ Install dependencies
+npm install
+3️⃣ Configure environment variables
+Create:
+src/.env
+Add:
+VITE_ROBOFLOW_API_KEY=your_api_key_here
+VITE_ROBOFLOW_MODEL=brain-tumor-detector-xxxx
+VITE_ROBOFLOW_VERSION=1
+4️⃣ Start development server
+npm run dev
+📸 Screenshots (to be added)
+MRI Upload UI
+Detection results
+Treatment plan screen
+🧭 Roadmap
+ Improve model accuracy
+ Add segmentation overlay
+ Add patient report generation
+ Add light/dark mode switching
+ Deploy final build to Vercel
+💡 Why TumorVision?
+Early detection saves lives — but MRI scans often require experienced specialists. TumorVision aims to make fast, accessible, AI-assisted tumor screening available to clinics, students, and researchers.
+👥 Team
+Name	Role
+Kevin Santhosh	Lead Developer
+Mohsin Bhojani	Developer
+Akash Harish	Developer
+Harshi Shah	Research & Documentation
+📜 License
+MIT License

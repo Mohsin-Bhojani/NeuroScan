@@ -118,5 +118,5 @@ TumorVision aims to make early tumor screening accessible by combining modern we
 
 ## 📜 License
 
-MIT License
+Apache License 2.0
 

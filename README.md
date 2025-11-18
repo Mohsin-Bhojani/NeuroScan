@@ -40,7 +40,7 @@ TumorVision is an AI-powered web application that detects brain tumors from MRI 
 │└── Home.tsx<br>
 ├── App.tsx<br>
 ├── main.tsx<br>
-└── styles/<br>
+├── styles/<br>
 └── globals.css<br>
 
 
